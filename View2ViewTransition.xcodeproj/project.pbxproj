@@ -26,6 +26,7 @@
 		4389BB641D73FA62000CD88C /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		4389BBB01D74313F000CD88C /* View2ViewTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View2ViewTransition.swift; sourceTree = "<group>"; };
 		4389BBB21D74314D000CD88C /* UIView+SnapshotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SnapshotImage.swift"; sourceTree = "<group>"; };
+		DBED347123E8C65A0050C389 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +43,7 @@
 		4389BB4A1D73F9E8000CD88C = {
 			isa = PBXGroup;
 			children = (
+				DBED347123E8C65A0050C389 /* Package.swift */,
 				4389BB561D73F9E8000CD88C /* View2ViewTransition */,
 				4389BB5F1D73FA30000CD88C /* Sources */,
 				4389BB551D73F9E8000CD88C /* Products */,
