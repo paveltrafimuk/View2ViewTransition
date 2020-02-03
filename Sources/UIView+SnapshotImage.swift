@@ -10,7 +10,7 @@ import UIKit
 
 public extension UIView {
     
-    public func snapshotImage() -> UIImage? {
+    func snapshotImage() -> UIImage? {
         let size: CGSize = CGSize(width: floor(frame.size.width), height: floor(frame.size.height))
         UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else {
