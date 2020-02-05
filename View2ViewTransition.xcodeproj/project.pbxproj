@@ -14,6 +14,7 @@
 		DBED347C23E8C9190050C389 /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBED347623E8C9190050C389 /* TransitionController.swift */; };
 		DBED347D23E8C9190050C389 /* DismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBED347723E8C9190050C389 /* DismissAnimationController.swift */; };
 		DBED347E23E8C9190050C389 /* UIView+SnapshotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBED347823E8C9190050C389 /* UIView+SnapshotImage.swift */; };
+		DBED349023EA7D490050C389 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBED348F23EA7D480050C389 /* UIViewController+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		DBED347623E8C9190050C389 /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		DBED347723E8C9190050C389 /* DismissAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissAnimationController.swift; sourceTree = "<group>"; };
 		DBED347823E8C9190050C389 /* UIView+SnapshotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SnapshotImage.swift"; sourceTree = "<group>"; };
+		DBED348F23EA7D480050C389 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				DBED347423E8C9190050C389 /* PresentAnimationController.swift */,
 				DBED347623E8C9190050C389 /* TransitionController.swift */,
 				DBED347823E8C9190050C389 /* UIView+SnapshotImage.swift */,
+				DBED348F23EA7D480050C389 /* UIViewController+Extension.swift */,
 				DBED347523E8C9190050C389 /* View2ViewTransition.swift */,
 				4389BB571D73F9E8000CD88C /* View2ViewTransition.h */,
 				4389BB591D73F9E8000CD88C /* Info.plist */,
@@ -156,6 +159,7 @@
 				DBED347A23E8C9190050C389 /* PresentAnimationController.swift in Sources */,
 				DBED347E23E8C9190050C389 /* UIView+SnapshotImage.swift in Sources */,
 				DBED347B23E8C9190050C389 /* View2ViewTransition.swift in Sources */,
+				DBED349023EA7D490050C389 /* UIViewController+Extension.swift in Sources */,
 				DBED347923E8C9190050C389 /* DismissInteractiveTransition.swift in Sources */,
 				DBED347D23E8C9190050C389 /* DismissAnimationController.swift in Sources */,
 			);

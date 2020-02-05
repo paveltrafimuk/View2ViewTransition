@@ -79,15 +79,18 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
         
         // Get ViewControllers and Container View
 
-        guard let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? View2ViewTransitionPresenting , fromViewController is UIViewController else {
+        let rawFrom = transitionContext.viewController(forKey: .from)
+        let rawTo = transitionContext.viewController(forKey: .to)
+
+        guard let fromViewController = rawFrom?.unpackedViewController as? UIViewController & View2ViewTransitionPresenting else {
             if self.transitionController.debuging {
-                debugPrint("View2ViewTransition << No valid presenting view controller (\(transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as Any)))")
+                debugPrint("View2ViewTransition << No valid presenting view controller (\(transitionContext.viewController(forKey: .from) as Any)))")
             }
             return
         }
-        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? View2ViewTransitionPresented , toViewController is UIViewController else {
+        guard let toViewController = rawTo?.unpackedViewController as? UIViewController & View2ViewTransitionPresented else {
             if self.transitionController.debuging {
-                debugPrint("View2ViewTransition << No valid presented view controller (\(transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as Any))")
+                debugPrint("View2ViewTransition << No valid presented view controller (\(transitionContext.viewController(forKey: .to) as Any))")
             }
             return
         }

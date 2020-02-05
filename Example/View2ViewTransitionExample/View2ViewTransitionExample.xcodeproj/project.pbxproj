@@ -13,13 +13,40 @@
 		4389BB8A1D73FB3F000CD88C /* PresentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB881D73FB3F000CD88C /* PresentedViewController.swift */; };
 		4389BB8B1D73FB3F000CD88C /* PresentingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB891D73FB3F000CD88C /* PresentingViewController.swift */; };
 		43A6266A1D7E792E00E86FEC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A626691D7E792E00E86FEC /* MenuViewController.swift */; };
-		CD05433C2175EFC70071333E /* View2ViewTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB8D1D73FB63000CD88C /* View2ViewTransition.swift */; };
-		CD05433D2175EFC70071333E /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB911D73FB63000CD88C /* TransitionController.swift */; };
-		CD05433E2175EFC70071333E /* PresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB901D73FB63000CD88C /* PresentAnimationController.swift */; };
-		CD05433F2175EFC70071333E /* DismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB8E1D73FB63000CD88C /* DismissAnimationController.swift */; };
-		CD0543402175EFC70071333E /* DismissInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BB8F1D73FB63000CD88C /* DismissInteractiveTransition.swift */; };
-		CD0543412175EFC70071333E /* UIView+SnapshotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4389BBAE1D74311E000CD88C /* UIView+SnapshotImage.swift */; };
+		DBED348C23E8CC700050C389 /* View2ViewTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBED348823E8CC5A0050C389 /* View2ViewTransition.framework */; };
+		DBED348D23E8CC700050C389 /* View2ViewTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBED348823E8CC5A0050C389 /* View2ViewTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBED348723E8CC5A0050C389 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBED348323E8CC5A0050C389 /* View2ViewTransition.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4389BB541D73F9E8000CD88C;
+			remoteInfo = View2ViewTransition;
+		};
+		DBED348923E8CC6A0050C389 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBED348323E8CC5A0050C389 /* View2ViewTransition.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4389BB531D73F9E8000CD88C;
+			remoteInfo = View2ViewTransition;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DBED348E23E8CC700050C389 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DBED348D23E8CC700050C389 /* View2ViewTransition.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4389BB731D73FA96000CD88C /* View2ViewTransitionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = View2ViewTransitionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,13 +56,8 @@
 		4389BB821D73FA96000CD88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4389BB881D73FB3F000CD88C /* PresentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewController.swift; sourceTree = "<group>"; };
 		4389BB891D73FB3F000CD88C /* PresentingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentingViewController.swift; sourceTree = "<group>"; };
-		4389BB8D1D73FB63000CD88C /* View2ViewTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = View2ViewTransition.swift; path = ../../../Sources/View2ViewTransition.swift; sourceTree = "<group>"; };
-		4389BB8E1D73FB63000CD88C /* DismissAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DismissAnimationController.swift; path = ../../../Sources/DismissAnimationController.swift; sourceTree = "<group>"; };
-		4389BB8F1D73FB63000CD88C /* DismissInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DismissInteractiveTransition.swift; path = ../../../Sources/DismissInteractiveTransition.swift; sourceTree = "<group>"; };
-		4389BB901D73FB63000CD88C /* PresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentAnimationController.swift; path = ../../../Sources/PresentAnimationController.swift; sourceTree = "<group>"; };
-		4389BB911D73FB63000CD88C /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionController.swift; path = ../../../Sources/TransitionController.swift; sourceTree = "<group>"; };
-		4389BBAE1D74311E000CD88C /* UIView+SnapshotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+SnapshotImage.swift"; path = "../../../Sources/UIView+SnapshotImage.swift"; sourceTree = "<group>"; };
 		43A626691D7E792E00E86FEC /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		DBED348323E8CC5A0050C389 /* View2ViewTransition.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = View2ViewTransition.xcodeproj; path = ../../View2ViewTransition.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBED348C23E8CC700050C389 /* View2ViewTransition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,9 +75,10 @@
 		4389BB6A1D73FA96000CD88C = {
 			isa = PBXGroup;
 			children = (
+				DBED348323E8CC5A0050C389 /* View2ViewTransition.xcodeproj */,
 				4389BB751D73FA96000CD88C /* View2ViewTransitionExample */,
-				4389BB8C1D73FB47000CD88C /* Vender */,
 				4389BB741D73FA96000CD88C /* Products */,
+				DBED348B23E8CC700050C389 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,18 +104,19 @@
 			path = View2ViewTransitionExample;
 			sourceTree = "<group>";
 		};
-		4389BB8C1D73FB47000CD88C /* Vender */ = {
+		DBED348423E8CC5A0050C389 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4389BB8D1D73FB63000CD88C /* View2ViewTransition.swift */,
-				4389BB911D73FB63000CD88C /* TransitionController.swift */,
-				4389BB901D73FB63000CD88C /* PresentAnimationController.swift */,
-				4389BB8E1D73FB63000CD88C /* DismissAnimationController.swift */,
-				4389BB8F1D73FB63000CD88C /* DismissInteractiveTransition.swift */,
-				4389BBAE1D74311E000CD88C /* UIView+SnapshotImage.swift */,
+				DBED348823E8CC5A0050C389 /* View2ViewTransition.framework */,
 			);
-			name = Vender;
-			path = View2ViewTransitionExample;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBED348B23E8CC700050C389 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,10 +129,12 @@
 				4389BB6F1D73FA96000CD88C /* Sources */,
 				4389BB701D73FA96000CD88C /* Frameworks */,
 				4389BB711D73FA96000CD88C /* Resources */,
+				DBED348E23E8CC700050C389 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DBED348A23E8CC6A0050C389 /* PBXTargetDependency */,
 			);
 			name = View2ViewTransitionExample;
 			productName = View2ViewTransitionExample;
@@ -143,12 +170,28 @@
 			mainGroup = 4389BB6A1D73FA96000CD88C;
 			productRefGroup = 4389BB741D73FA96000CD88C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DBED348423E8CC5A0050C389 /* Products */;
+					ProjectRef = DBED348323E8CC5A0050C389 /* View2ViewTransition.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4389BB721D73FA96000CD88C /* View2ViewTransitionExample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DBED348823E8CC5A0050C389 /* View2ViewTransition.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = View2ViewTransition.framework;
+			remoteRef = DBED348723E8CC5A0050C389 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4389BB711D73FA96000CD88C /* Resources */ = {
@@ -167,20 +210,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD05433D2175EFC70071333E /* TransitionController.swift in Sources */,
-				CD05433E2175EFC70071333E /* PresentAnimationController.swift in Sources */,
-				CD0543412175EFC70071333E /* UIView+SnapshotImage.swift in Sources */,
 				43A6266A1D7E792E00E86FEC /* MenuViewController.swift in Sources */,
 				4389BB771D73FA96000CD88C /* AppDelegate.swift in Sources */,
-				CD05433C2175EFC70071333E /* View2ViewTransition.swift in Sources */,
 				4389BB8A1D73FB3F000CD88C /* PresentedViewController.swift in Sources */,
-				CD0543402175EFC70071333E /* DismissInteractiveTransition.swift in Sources */,
-				CD05433F2175EFC70071333E /* DismissAnimationController.swift in Sources */,
 				4389BB8B1D73FB3F000CD88C /* PresentingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DBED348A23E8CC6A0050C389 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = View2ViewTransition;
+			targetProxy = DBED348923E8CC6A0050C389 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4389BB7F1D73FA96000CD88C /* LaunchScreen.storyboard */ = {
