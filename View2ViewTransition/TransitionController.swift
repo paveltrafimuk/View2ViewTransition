@@ -40,12 +40,14 @@ public final class TransitionController: NSObject {
         return interactiveTransition
     }()
     
-    fileprivate(set) weak var presentingViewController: UIViewController!
+    fileprivate(set) weak var presentingViewController: (UIViewController & View2ViewTransitionPresenting)?
     
-    fileprivate(set) var presentedViewController: UIViewController!
+    fileprivate(set) var presentedViewController: (UIViewController & View2ViewTransitionPresented)?
 
     /// Type Safe Present for Swift
-    public func present<T: View2ViewTransitionPresented, U: View2ViewTransitionPresenting>(viewController presentedViewController: T, on presentingViewController: U, attached: UIViewController, completion: (() -> Void)?) where T: UIViewController, U: UIViewController {
+    public func present(viewController presentedViewController: UIViewController & View2ViewTransitionPresented,
+                        on presentingViewController: UIViewController & View2ViewTransitionPresenting,
+                        attached: UIViewController, completion: (() -> Void)?) {
         
         let pan = UIPanGestureRecognizer(target: dismissInteractiveTransition, action: #selector(dismissInteractiveTransition.handlePanGesture(_:)))
         attached.view.addGestureRecognizer(pan)
@@ -60,7 +62,9 @@ public final class TransitionController: NSObject {
     }
     
     /// Type Safe Push for Swift
-    public func push<T: View2ViewTransitionPresented, U: View2ViewTransitionPresenting>(viewController presentedViewController: T, on presentingViewController: U, attached: UIViewController) where T: UIViewController, U: UIViewController {
+    public func push(viewController presentedViewController: UIViewController & View2ViewTransitionPresented,
+                     on presentingViewController: UIViewController & View2ViewTransitionPresenting,
+                     attached: UIViewController) {
         
         guard let navigationController = presentingViewController.navigationController else {
             if self.debuging {

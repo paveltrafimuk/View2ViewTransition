@@ -39,9 +39,9 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
             
             switch self.transitionController.type {
             case .presenting:
-                self.transitionController.presentedViewController.dismiss(animated: true, completion: nil)
+                self.transitionController.presentedViewController?.dismiss(animated: true, completion: nil)
             case .pushing:
-                self.transitionController.presentedViewController.navigationController!.popViewController(animated: true)
+                self.transitionController.presentedViewController?.navigationController?.popViewController(animated: true)
             }
             
             return
@@ -107,7 +107,7 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
             } else {
                 
                 finish()
-                self.transitionController.presentingViewController.view.isUserInteractionEnabled = false
+                self.transitionController.presentingViewController?.view.isUserInteractionEnabled = false
                 
                 let duration: Double = animationController.transitionDuration
                 UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIView.AnimationOptions(), animations: {
@@ -129,7 +129,7 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
                         self.animationController.destinationView.isHidden = false
                     }
                     
-                    self.transitionController.presentingViewController.view.isUserInteractionEnabled = true
+                    self.transitionController.presentingViewController?.view.isUserInteractionEnabled = true
                     self.animationController.initialView.isHidden = false
                     self.transitionContext.completeTransition(true)
                 })

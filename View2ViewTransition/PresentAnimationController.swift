@@ -38,13 +38,13 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
     
     func prepare() {
         
-        guard let presentingViewController = transitionController.presentingViewController as? View2ViewTransitionPresenting else {
+        guard let presentingViewController = transitionController.presentingViewController else {
             if transitionController.debuging {
                 debugPrint("View2ViewTransition << No valid presenting view controller")
             }
             return
         }
-        guard let presentedViewController = transitionController.presentedViewController as? View2ViewTransitionPresented else {
+        guard let presentedViewController = transitionController.presentedViewController else {
             if transitionController.debuging {
                 debugPrint("View2ViewTransition << No valid presented view controller")
             }

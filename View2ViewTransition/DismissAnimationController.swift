@@ -102,12 +102,12 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
             containerView.sendSubviewToBack(toViewControllerView)
         }
         
-        if let presentingViewController: View2ViewTransitionPresenting = transitionController.presentingViewController as? View2ViewTransitionPresenting {
+        if let presentingViewController = transitionController.presentingViewController {
             presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: false)
             let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: false)
             initialTransitionView = initialView.snapshotView(afterScreenUpdates: false)
         }
-        if let presentedViewController: View2ViewTransitionPresented = transitionController.presentedViewController as? View2ViewTransitionPresented {
+        if let presentedViewController = transitionController.presentedViewController {
             presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: false)
             let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: false)
             destinationTransitionView = destinationView.snapshotView(afterScreenUpdates: true)
