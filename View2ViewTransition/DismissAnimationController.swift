@@ -12,15 +12,6 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
     
     public override init() {
         super.init()
-        
-        // Create Snapshot from Destination View
-        destinationTransitionView = UIImageView(image: nil)
-        destinationTransitionView.clipsToBounds = true
-        destinationTransitionView.contentMode = .scaleAspectFill
-        
-        initialTransitionView = UIImageView(image: nil)
-        initialTransitionView.clipsToBounds = true
-        initialTransitionView.contentMode = .scaleAspectFill
     }
     
     // MARK: - Elements
@@ -49,32 +40,14 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
     
     fileprivate(set) var destinationFrame: CGRect!
     
-    fileprivate(set) var initialTransitionView: UIImageView!
+    fileprivate(set) var initialTransitionView: UIView?
     
-    fileprivate(set) var destinationTransitionView: UIImageView!
+    fileprivate(set) var destinationTransitionView: UIView?
 
-    var initialSnapshotImage: UIImage?
-    
-    var destinationSnapshotImage: UIImage?
-    
     // MARK: - Prepare
     
     func prepare() {
-        
-        guard let presentingViewController: View2ViewTransitionPresenting = transitionController.presentingViewController as? View2ViewTransitionPresenting else {
-            return
-        }
-        guard let presentedViewController: View2ViewTransitionPresented = transitionController.presentedViewController as? View2ViewTransitionPresented else {
-            return
-        }
-        
-        presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: false)
-        let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: false)
-        initialSnapshotImage = initialView.snapshotImage()
-        
-        presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: false)
-        let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: false)
-        destinationSnapshotImage = destinationView.snapshotImage()
+        // move to animateTransition as we don't add itinial view to window and can't make screenshot
     }
     
     // MARK: - Transition
@@ -116,14 +89,10 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
         toViewController.prepareInitialView(self.transitionController.userInfo, isPresenting: false)
         initialView = toViewController.initialView(self.transitionController.userInfo, isPresenting: false)
         initialFrame = toViewController.initialFrame(self.transitionController.userInfo, isPresenting: false)
-                
-        // Hide Transisioning Views
-        initialView.isHidden = true
-        destinationView.isHidden = true
         
         // Add To,FromViewController's View
-        let toViewControllerView: UIView = (toViewController as! UIViewController).view
-        let fromViewControllerView: UIView = (fromViewController as! UIViewController).view
+        let toViewControllerView: UIView = toViewController.view
+        let fromViewControllerView: UIView = fromViewController.view
         containerView.addSubview(fromViewControllerView)
         
         // This condition is to prevent getting white screen at dismissing when multiple view controller are presented.
@@ -133,17 +102,35 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
             containerView.sendSubviewToBack(toViewControllerView)
         }
         
-        // Add Snapshot
-        destinationTransitionView.transform = .identity
-        destinationTransitionView.image = destinationSnapshotImage
-        destinationTransitionView.frame = destinationFrame
-        containerView.addSubview(destinationTransitionView)
+        if let presentingViewController: View2ViewTransitionPresenting = transitionController.presentingViewController as? View2ViewTransitionPresenting {
+            presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: false)
+            let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: false)
+            initialTransitionView = initialView.snapshotView(afterScreenUpdates: false)
+        }
+        if let presentedViewController: View2ViewTransitionPresented = transitionController.presentedViewController as? View2ViewTransitionPresented {
+            presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: false)
+            let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: false)
+            destinationTransitionView = destinationView.snapshotView(afterScreenUpdates: true)
+        }
+
+        // Hide Transisioning Views
+        initialView.isHidden = true
+        destinationView.isHidden = true
+
         
-        initialTransitionView.transform = .identity
-        initialTransitionView.image = initialSnapshotImage
-        initialTransitionView.frame = destinationFrame
-        containerView.addSubview(initialTransitionView)
-        initialTransitionView.alpha = 0.0
+        // Add Snapshot
+        destinationTransitionView?.transform = .identity
+        destinationTransitionView?.frame = destinationFrame
+        if let view = destinationTransitionView {
+            containerView.addSubview(view)
+        }
+        
+        initialTransitionView?.transform = .identity
+        initialTransitionView?.frame = destinationFrame
+        if let view = initialTransitionView {
+            containerView.addSubview(view)
+        }
+        initialTransitionView?.alpha = 0.0
         
         // Animation
         let duration: TimeInterval = transitionDuration(using: transitionContext)
@@ -158,15 +145,15 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
         
             UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: self.usingSpringWithDamping, initialSpringVelocity: self.initialSpringVelocity, options: self.animationOptions, animations: {
                 
-                self.destinationTransitionView.frame = self.initialFrame
-                self.initialTransitionView.frame = self.initialFrame
-                self.initialTransitionView.alpha = 1.0
+                self.destinationTransitionView?.frame = self.initialFrame
+                self.initialTransitionView?.frame = self.initialFrame
+                self.initialTransitionView?.alpha = 1.0
                 fromViewControllerView.alpha = CGFloat.leastNormalMagnitude
                 
             }, completion: { _ in
                     
-                self.destinationTransitionView.removeFromSuperview()
-                self.initialTransitionView.removeFromSuperview()
+                self.destinationTransitionView?.removeFromSuperview()
+                self.initialTransitionView?.removeFromSuperview()
                 
                 if isNeedToControlToViewController && self.transitionController.type == .presenting {
                     toViewControllerView.removeFromSuperview()

@@ -62,15 +62,15 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
             
             update(progress)
             
-            self.animationController.destinationTransitionView.alpha = 1.0
-            self.animationController.initialTransitionView.alpha = 0.0
+            self.animationController.destinationTransitionView?.alpha = 1.0
+            self.animationController.initialTransitionView?.alpha = 0.0
             
             // Affine Transform
             let scale: CGFloat = (1000.0 - CGFloat(distance))/1000.0
             let transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale).translatedBy(x: translation.x/scale, y: translation.y/scale)
             
-            animationController.destinationTransitionView.transform = transform
-            animationController.initialTransitionView.transform = transform
+            animationController.destinationTransitionView?.transform = transform
+            animationController.initialTransitionView?.transform = transform
             
         case .cancelled:
             
@@ -88,14 +88,14 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
                 let duration: Double = Double(self.duration)*Double(progress)
                 UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: UIView.AnimationOptions(), animations: {
                     
-                    self.animationController.destinationTransitionView.frame = self.animationController.destinationFrame
-                    self.animationController.initialTransitionView.frame = self.animationController.destinationFrame
+                    self.animationController.destinationTransitionView?.frame = self.animationController.destinationFrame
+                    self.animationController.initialTransitionView?.frame = self.animationController.destinationFrame
                     
                 }, completion: { _ in
                         
                     // Cancel Transition
-                    self.animationController.destinationTransitionView.removeFromSuperview()
-                    self.animationController.initialTransitionView.removeFromSuperview()
+                    self.animationController.destinationTransitionView?.removeFromSuperview()
+                    self.animationController.initialTransitionView?.removeFromSuperview()
                    
                     self.animationController.destinationView.isHidden = false
                     self.animationController.initialView.isHidden = false
@@ -112,18 +112,18 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
                 let duration: Double = animationController.transitionDuration
                 UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIView.AnimationOptions(), animations: {
                     
-                    self.animationController.destinationTransitionView.alpha = 0.0
-                    self.animationController.initialTransitionView.alpha = 1.0
+                    self.animationController.destinationTransitionView?.alpha = 0.0
+                    self.animationController.initialTransitionView?.alpha = 1.0
 
-                    self.animationController.destinationTransitionView.frame = self.animationController.initialFrame
-                    self.animationController.initialTransitionView.frame = self.animationController.initialFrame
+                    self.animationController.destinationTransitionView?.frame = self.animationController.initialFrame
+                    self.animationController.initialTransitionView?.frame = self.animationController.initialFrame
                     
                 }, completion: { _ in
                     
                     if self.transitionController.type == .pushing {
                             
-                        self.animationController.destinationTransitionView.removeFromSuperview()
-                        self.animationController.initialTransitionView.removeFromSuperview()
+                        self.animationController.destinationTransitionView?.removeFromSuperview()
+                        self.animationController.initialTransitionView?.removeFromSuperview()
                             
                         self.animationController.initialView.isHidden = false
                         self.animationController.destinationView.isHidden = false

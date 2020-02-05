@@ -12,15 +12,6 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
     
     public override init() {
         super.init()
-        
-        // Create Snapshot from Destination View
-        destinationTransitionView = UIImageView(image: nil)
-        destinationTransitionView.clipsToBounds = true
-        destinationTransitionView.contentMode = .scaleAspectFill
-        
-        initialTransitionView = UIImageView(image: nil)
-        initialTransitionView.clipsToBounds = true
-        initialTransitionView.contentMode = .scaleAspectFill
     }
     
     // MARK: - Elements
@@ -35,9 +26,9 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
     
     public var animationOptions: UIView.AnimationOptions = [.curveEaseInOut, .allowUserInteraction]
     
-    fileprivate(set) var initialTransitionView: UIImageView!
+    fileprivate(set) var initialTransitionView: UIView?
     
-    fileprivate(set) var destinationTransitionView: UIImageView!
+    fileprivate(set) var destinationTransitionView: UIView?
 
     var initialSnapshotImage: UIImage?
     
@@ -62,11 +53,11 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
 
         presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: true)
         let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: true)
-        initialSnapshotImage = initialView.snapshotImage()
+        initialTransitionView = initialView.snapshotView(afterScreenUpdates: false)
 
         presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: true)
         let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: true)
-        destinationSnapshotImage = destinationView.snapshotImage()
+        destinationTransitionView = destinationView.snapshotView(afterScreenUpdates: true)
     }
     
     // MARK: - Transition
@@ -116,34 +107,36 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
         destinationView.isHidden = true
         
         // Add ToViewController's View
-        let toViewControllerView: UIView = (toViewController as! UIViewController).view
+        let toViewControllerView: UIView = toViewController.view
         toViewControllerView.alpha = CGFloat.leastNormalMagnitude
         containerView.addSubview(toViewControllerView)
         
         // Add Snapshot
-        initialTransitionView.image = initialSnapshotImage
-        initialTransitionView.frame = initialFrame
-        containerView.addSubview(initialTransitionView)
+        initialTransitionView?.frame = initialFrame
+        if let view = initialTransitionView {
+            containerView.addSubview(view)
+        }
         
-        destinationTransitionView.image = destinationSnapshotImage
-        destinationTransitionView.frame = initialFrame
-        containerView.addSubview(destinationTransitionView)
-        destinationTransitionView.alpha = 0.0
+        destinationTransitionView?.frame = initialFrame
+        if let view = destinationTransitionView {
+            containerView.addSubview(view)
+        }
+        destinationTransitionView?.alpha = 0.0
         
         // Animation
         let duration: TimeInterval = transitionDuration(using: transitionContext)
         UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: self.usingSpringWithDamping, initialSpringVelocity: self.initialSpringVelocity, options: self.animationOptions, animations: {
             
-            self.initialTransitionView.frame = destinationFrame
-            self.initialTransitionView.alpha = 0.0
-            self.destinationTransitionView.frame = destinationFrame
-            self.destinationTransitionView.alpha = 1.0
+            self.initialTransitionView?.frame = destinationFrame
+            self.initialTransitionView?.alpha = 0.0
+            self.destinationTransitionView?.frame = destinationFrame
+            self.destinationTransitionView?.alpha = 1.0
             toViewControllerView.alpha = 1.0
             
         }, completion: { _ in
                 
-            self.initialTransitionView.removeFromSuperview()
-            self.destinationTransitionView.removeFromSuperview()
+            self.initialTransitionView?.removeFromSuperview()
+            self.destinationTransitionView?.removeFromSuperview()
                 
             initialView.isHidden = false
             destinationView.isHidden = false

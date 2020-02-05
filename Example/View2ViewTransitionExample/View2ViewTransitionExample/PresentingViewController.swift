@@ -11,6 +11,15 @@ import View2ViewTransition
 
 class PresentingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        modalPresentationStyle = .fullScreen
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
