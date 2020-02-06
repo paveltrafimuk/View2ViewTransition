@@ -13,11 +13,16 @@ public enum TransitionControllerType {
     case pushing
 }
 
+public class TransitionControllerContext {
+    public var initialIndexPath: IndexPath?
+    public var destinationIndexPath: IndexPath?
+}
+
 public final class TransitionController: NSObject {
     
     public var debuging: Bool = false
     
-    public var userInfo: [String: Any]? = nil
+    public let context = TransitionControllerContext()
     
     private(set) var type: TransitionControllerType = .presenting
     

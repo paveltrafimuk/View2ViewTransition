@@ -77,7 +77,8 @@ class PresentingViewController: UIViewController, UICollectionViewDelegate, UICo
         let presentedViewController: PresentedViewController = PresentedViewController()
         
         presentedViewController.transitionController = self.transitionController
-        transitionController.userInfo = ["destinationIndexPath": indexPath as NSIndexPath, "initialIndexPath": indexPath as NSIndexPath]
+        transitionController.context.initialIndexPath = indexPath
+        transitionController.context.destinationIndexPath = indexPath
         
         // This example will push view controller if presenting view controller has navigation controller.
         // Otherwise, present another view controller
@@ -132,24 +133,24 @@ class PresentingViewController: UIViewController, UICollectionViewDelegate, UICo
 
 extension PresentingViewController: View2ViewTransitionPresenting {
     
-    func initialFrame(_ userInfo: [String: Any]?, isPresenting: Bool) -> CGRect {
+    func initialFrame(_ context: TransitionControllerContext, isPresenting: Bool) -> CGRect {
         
-        guard let indexPath: IndexPath = userInfo?["initialIndexPath"] as? IndexPath, let attributes: UICollectionViewLayoutAttributes = self.collectionView.layoutAttributesForItem(at: indexPath) else {
+        guard let indexPath: IndexPath = context.initialIndexPath, let attributes: UICollectionViewLayoutAttributes = self.collectionView.layoutAttributesForItem(at: indexPath) else {
             return CGRect.zero
         }
         return self.collectionView.convert(attributes.frame, to: self.collectionView.superview)
     }
     
-    func initialView(_ userInfo: [String: Any]?, isPresenting: Bool) -> UIView {
+    func initialView(_ context: TransitionControllerContext, isPresenting: Bool) -> UIView {
         
-        let indexPath: IndexPath = userInfo!["initialIndexPath"] as! IndexPath
+        let indexPath: IndexPath = context.initialIndexPath!
         let cell: UICollectionViewCell = self.collectionView.cellForItem(at: indexPath)!
         
         return cell.contentView
     }
     
-    func prepareInitialView(_ userInfo: [String : Any]?, isPresenting: Bool) {
-        let indexPath: IndexPath = userInfo!["initialIndexPath"] as! IndexPath
+    func prepareInitialView(_ context: TransitionControllerContext, isPresenting: Bool) {
+        let indexPath: IndexPath = context.initialIndexPath!
         
         if !isPresenting && !self.collectionView.indexPathsForVisibleItems.contains(indexPath) {
             self.collectionView.reloadData()

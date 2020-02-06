@@ -14,21 +14,21 @@ public protocol View2ViewTransitionPresenting {
     /// Return initial transition view frame in window.
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func initialFrame(_ userInfo: [String: Any]?, isPresenting: Bool) -> CGRect
+    func initialFrame(_ context: TransitionControllerContext, isPresenting: Bool) -> CGRect
     
     /// Return initial transition view.
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func initialView(_ userInfo: [String: Any]?, isPresenting: Bool) -> UIView
+    func initialView(_ context: TransitionControllerContext, isPresenting: Bool) -> UIView
     
     /// Prepare initial transition view (optional).
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func prepareInitialView(_ userInfo: [String: Any]?, isPresenting: Bool) -> Void
+    func prepareInitialView(_ context: TransitionControllerContext, isPresenting: Bool) -> Void
 }
 
 extension View2ViewTransitionPresenting {
-    func prepareInitialView(_ userInfo: [String: Any]?, isPresenting: Bool) -> Void { }
+    func prepareInitialView(_ context: TransitionControllerContext, isPresenting: Bool) -> Void { }
 }
 
 /// Protocol for Presented View Controller
@@ -37,19 +37,19 @@ public protocol View2ViewTransitionPresented {
     /// Return destination transition view frame in window.
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func destinationFrame(_ userInfo: [String: Any]?, isPresenting: Bool) -> CGRect
+    func destinationFrame(_ context: TransitionControllerContext, isPresenting: Bool) -> CGRect
     
     /// Return destination transition view.
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func destinationView(_ userInfo: [String: Any]?, isPresenting: Bool) -> UIView
+    func destinationView(_ context: TransitionControllerContext, isPresenting: Bool) -> UIView
     
     /// Prepare destination transition view (optional).
     /// - parameter userInfo: user info
     /// - parameter isPresenting: transition is present or not
-    func prepareDestinationView(_ userInfo: [String: Any]?, isPresenting: Bool) -> Void
+    func prepareDestinationView(_ context: TransitionControllerContext, isPresenting: Bool) -> Void
 }
 
 extension View2ViewTransitionPresented {
-    func prepareDestinationView(_ userInfo: [String: Any]?, isPresenting: Bool) -> Void { }
+    func prepareDestinationView(_ context: TransitionControllerContext, isPresenting: Bool) -> Void { }
 }

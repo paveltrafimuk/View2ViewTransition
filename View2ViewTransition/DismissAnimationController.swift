@@ -82,13 +82,13 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
         
         let containerView = transitionContext.containerView
         
-        fromViewController.prepareDestinationView(self.transitionController.userInfo, isPresenting: false)
-        destinationView = fromViewController.destinationView(self.transitionController.userInfo, isPresenting: false)
-        destinationFrame = fromViewController.destinationFrame(self.transitionController.userInfo, isPresenting: false)
+        fromViewController.prepareDestinationView(self.transitionController.context, isPresenting: false)
+        destinationView = fromViewController.destinationView(self.transitionController.context, isPresenting: false)
+        destinationFrame = fromViewController.destinationFrame(self.transitionController.context, isPresenting: false)
         
-        toViewController.prepareInitialView(self.transitionController.userInfo, isPresenting: false)
-        initialView = toViewController.initialView(self.transitionController.userInfo, isPresenting: false)
-        initialFrame = toViewController.initialFrame(self.transitionController.userInfo, isPresenting: false)
+        toViewController.prepareInitialView(self.transitionController.context, isPresenting: false)
+        initialView = toViewController.initialView(self.transitionController.context, isPresenting: false)
+        initialFrame = toViewController.initialFrame(self.transitionController.context, isPresenting: false)
         
         // Add To,FromViewController's View
         let toViewControllerView: UIView = toViewController.view
@@ -103,13 +103,13 @@ public final class DismissAnimationController: NSObject, UIViewControllerAnimate
         }
         
         if let presentingViewController = transitionController.presentingViewController {
-            presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: false)
-            let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: false)
+            presentingViewController.prepareInitialView(transitionController.context, isPresenting: false)
+            let initialView: UIView = presentingViewController.initialView(transitionController.context, isPresenting: false)
             initialTransitionView = initialView.snapshotView(afterScreenUpdates: false)
         }
         if let presentedViewController = transitionController.presentedViewController {
-            presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: false)
-            let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: false)
+            presentedViewController.prepareDestinationView(transitionController.context, isPresenting: false)
+            let destinationView: UIView = presentedViewController.destinationView(transitionController.context, isPresenting: false)
             destinationTransitionView = destinationView.snapshotView(afterScreenUpdates: true)
         }
 

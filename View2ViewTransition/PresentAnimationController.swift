@@ -51,12 +51,12 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
             return
         }
 
-        presentingViewController.prepareInitialView(transitionController.userInfo, isPresenting: true)
-        let initialView: UIView = presentingViewController.initialView(transitionController.userInfo, isPresenting: true)
+        presentingViewController.prepareInitialView(transitionController.context, isPresenting: true)
+        let initialView: UIView = presentingViewController.initialView(transitionController.context, isPresenting: true)
         initialTransitionView = initialView.snapshotView(afterScreenUpdates: false)
 
-        presentedViewController.prepareDestinationView(transitionController.userInfo, isPresenting: true)
-        let destinationView: UIView = presentedViewController.destinationView(transitionController.userInfo, isPresenting: true)
+        presentedViewController.prepareDestinationView(transitionController.context, isPresenting: true)
+        let destinationView: UIView = presentedViewController.destinationView(transitionController.context, isPresenting: true)
         destinationTransitionView = destinationView.snapshotView(afterScreenUpdates: true)
     }
     
@@ -94,13 +94,13 @@ public final class PresentAnimationController: NSObject, UIViewControllerAnimate
         
         let containerView = transitionContext.containerView
 
-        fromViewController.prepareInitialView(self.transitionController.userInfo, isPresenting: true)
-        let initialView: UIView = fromViewController.initialView(self.transitionController.userInfo, isPresenting: true)
-        let initialFrame: CGRect = fromViewController.initialFrame(self.transitionController.userInfo, isPresenting: true)
+        fromViewController.prepareInitialView(self.transitionController.context, isPresenting: true)
+        let initialView: UIView = fromViewController.initialView(self.transitionController.context, isPresenting: true)
+        let initialFrame: CGRect = fromViewController.initialFrame(self.transitionController.context, isPresenting: true)
         
-        toViewController.prepareDestinationView(self.transitionController.userInfo, isPresenting: true)
-        let destinationView: UIView = toViewController.destinationView(self.transitionController.userInfo, isPresenting: true)
-        let destinationFrame: CGRect = toViewController.destinationFrame(self.transitionController.userInfo, isPresenting: true)
+        toViewController.prepareDestinationView(self.transitionController.context, isPresenting: true)
+        let destinationView: UIView = toViewController.destinationView(self.transitionController.context, isPresenting: true)
+        let destinationFrame: CGRect = toViewController.destinationFrame(self.transitionController.context, isPresenting: true)
         
         // Hide Transisioning Views
         initialView.isHidden = true

@@ -129,16 +129,18 @@ class PresentedViewController: UIViewController, UICollectionViewDelegate, UICol
     // MARK: Actions
     
     @objc func onCloseButtonClicked(sender: AnyObject) {
-        let indexPath: NSIndexPath = self.collectionView.indexPathsForVisibleItems.first! as NSIndexPath
-        self.transitionController.userInfo = ["destinationIndexPath": indexPath, "initialIndexPath": indexPath]
+        let indexPath = self.collectionView.indexPathsForVisibleItems.first!
+        
+        transitionController.context.initialIndexPath = indexPath
+        transitionController.context.destinationIndexPath = indexPath
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc func onBackItemClicked(sender: AnyObject) {
-        
-        let indexPath: NSIndexPath = self.collectionView.indexPathsForVisibleItems.first! as NSIndexPath
-        self.transitionController.userInfo = ["destinationIndexPath": indexPath, "initialIndexPath": indexPath]
-        
+        let indexPath = self.collectionView.indexPathsForVisibleItems.first!
+        transitionController.context.initialIndexPath = indexPath
+        transitionController.context.destinationIndexPath = indexPath
+
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: true)
         }
@@ -148,8 +150,10 @@ class PresentedViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        let indexPath: NSIndexPath = self.collectionView.indexPathsForVisibleItems.first! as NSIndexPath
-        self.transitionController.userInfo = ["destinationIndexPath": indexPath, "initialIndexPath": indexPath]
+        let indexPath = self.collectionView.indexPathsForVisibleItems.first!
+        
+        transitionController.context.initialIndexPath = indexPath
+        transitionController.context.destinationIndexPath = indexPath
 
         let panGestureRecognizer: UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
         let transate: CGPoint = panGestureRecognizer.translation(in: self.view)
@@ -159,8 +163,8 @@ class PresentedViewController: UIViewController, UICollectionViewDelegate, UICol
 
 extension PresentedViewController: View2ViewTransitionPresented {
     
-    func destinationFrame(_ userInfo: [String: Any]?, isPresenting: Bool) -> CGRect {
-        let indexPath: IndexPath = userInfo!["destinationIndexPath"] as! IndexPath
+    func destinationFrame(_ context: TransitionControllerContext, isPresenting: Bool) -> CGRect {
+        let indexPath = context.destinationIndexPath!
         let cell: PresentedCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as! PresentedCollectionViewCell
         // FIXME: Get frame on collection view more smart!!
         if let _ = navigationController, #available(iOS 11.0, *) {
@@ -172,18 +176,18 @@ extension PresentedViewController: View2ViewTransitionPresented {
         }
     }
 
-    func destinationView(_ userInfo: [String: Any]?, isPresenting: Bool) -> UIView {
+    func destinationView(_ context: TransitionControllerContext, isPresenting: Bool) -> UIView {
         
-        let indexPath: IndexPath = userInfo!["destinationIndexPath"] as! IndexPath
+        let indexPath = context.destinationIndexPath!
         let cell: PresentedCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as! PresentedCollectionViewCell
         return cell.content
     }
     
-    func prepareDestinationView(_ userInfo: [String: Any]?, isPresenting: Bool) {
+    func prepareDestinationView(_ context: TransitionControllerContext, isPresenting: Bool) {
         
         if isPresenting {
             
-            let indexPath: IndexPath = userInfo!["destinationIndexPath"] as! IndexPath
+            let indexPath = context.destinationIndexPath!
             let contentOfffset: CGPoint = CGPoint(x: self.collectionView.frame.size.width*CGFloat(indexPath.item), y: 0.0)
             self.collectionView.contentOffset = contentOfffset
             
