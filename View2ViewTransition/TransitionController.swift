@@ -56,7 +56,8 @@ public final class TransitionController: NSObject {
         
         let pan = UIPanGestureRecognizer(target: dismissInteractiveTransition, action: #selector(dismissInteractiveTransition.handlePanGesture(_:)))
         attached.view.addGestureRecognizer(pan)
-        
+        pan.delegate = self
+
         self.presentingViewController = presentingViewController
         self.presentedViewController = presentedViewController
         
@@ -65,6 +66,7 @@ public final class TransitionController: NSObject {
         // Present
         presentingViewController.present(presentedViewController, animated: true, completion: completion)
     }
+    
     
     /// Type Safe Push for Swift
     public func push(viewController presentedViewController: UIViewController & View2ViewTransitionPresented,
@@ -80,6 +82,7 @@ public final class TransitionController: NSObject {
         
         let pan = UIPanGestureRecognizer(target: dismissInteractiveTransition, action: #selector(dismissInteractiveTransition.handlePanGesture(_:)))
         attached.view.addGestureRecognizer(pan)
+        pan.delegate = self
         
         self.presentingViewController = presentingViewController
         self.presentedViewController = presentedViewController
@@ -88,6 +91,17 @@ public final class TransitionController: NSObject {
         
         // Push
         navigationController.pushViewController(presentedViewController, animated: true)
+    }
+}
+
+extension TransitionController: UIGestureRecognizerDelegate {
+    
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
+        }
+        let transate: CGPoint = panGestureRecognizer.translation(in: panGestureRecognizer.view)
+        return Double(abs(transate.y)/abs(transate.x)) > .pi / 4.0
     }
 }
 

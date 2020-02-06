@@ -9,7 +9,7 @@
 import UIKit
 import View2ViewTransition
 
-class PresentedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class PresentedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -33,14 +33,6 @@ class PresentedViewController: UIViewController, UICollectionViewDelegate, UICol
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if let gestureRecognizers = self.view.gestureRecognizers {
-            for gestureRecognizer in gestureRecognizers {
-                if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-                    panGestureRecognizer.delegate = self
-                }
-            }
-        }
     }
     
     // MARK: Elements
@@ -145,20 +137,6 @@ class PresentedViewController: UIViewController, UICollectionViewDelegate, UICol
             navigationController.popViewController(animated: true)
         }
     }
-    
-    // MARK: Gesture Delegate
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        let indexPath = self.collectionView.indexPathsForVisibleItems.first!
-        
-        transitionController.context.initialIndexPath = indexPath
-        transitionController.context.destinationIndexPath = indexPath
-
-        let panGestureRecognizer: UIPanGestureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
-        let transate: CGPoint = panGestureRecognizer.translation(in: self.view)
-        return Double(abs(transate.y)/abs(transate.x)) > .pi / 4.0
-    }
 }
 
 extension PresentedViewController: View2ViewTransitionPresented {
@@ -193,6 +171,11 @@ extension PresentedViewController: View2ViewTransitionPresented {
             
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
+        }
+        else {
+            let indexPath = self.collectionView.indexPathsForVisibleItems.first!
+            transitionController.context.initialIndexPath = indexPath
+            transitionController.context.destinationIndexPath = indexPath
         }
     }
 }
