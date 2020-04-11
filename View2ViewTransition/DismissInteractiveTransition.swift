@@ -81,7 +81,7 @@ open class DismissInteractiveTransition: UIPercentDrivenInteractiveTransition {
             
             self.interactionInProgress = false
             
-            if progress < 0.5 {
+            if progress < 0.3 {
                 
                 cancel()
                 
